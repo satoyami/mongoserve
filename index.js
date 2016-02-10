@@ -7,9 +7,9 @@ var url = 'mongodb://10.0.0.44:27017/test';
 
 var getmongo = function(db,score,callback) {
   var results = [];
-  var query = {"address.zipcode":"10075","grades.score":{$gt:score}}; 
+  var query = {"grades.score":{$gt:score}}; 
   console.log(query);
-  var cursor = db.collection('restaurants').find(query );
+  var cursor = db.collection('restaurants').find(query,{"name":1});
    cursor.each(function(err, doc) {
       assert.equal(err, null);
       if(doc != null) {
@@ -21,8 +21,6 @@ var getmongo = function(db,score,callback) {
       }
    });
 };
-
-
 
 app.get('/:score', function (req, res) {
   var gs = parseInt(req.params.score,10);
