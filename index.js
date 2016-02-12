@@ -1,7 +1,12 @@
 var express = require('express');
 var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
+var path = require('path');
 var app = express();
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
+
 
 var url = 'mongodb://10.0.0.44:27017/test';
 
@@ -45,6 +50,9 @@ var restGrade = function(db,grade,callback) {
 /*
  * API defintion
  */
+app.get('/', function (req, res) {
+  res.render('index',{title:'index'});
+});
 
 app.get('/score/:score', function (req, res) {
   var gs = parseInt(req.params.score,10);
