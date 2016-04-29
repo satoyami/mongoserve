@@ -13,7 +13,6 @@ var url = 'mongodb://10.0.0.44:27017/test';
 /*
  * Query function defintion
  */
-
 var restScore = function(db,score,callback) {
   var results = [];
   var query = {"grades.score":{$gt:score}}; 
@@ -60,7 +59,7 @@ app.get('/score/:score', function (req, res) {
     assert.equal(null, err);
 
     restScore(db,gs,function(docs){
-      res.json(docs);
+      res.render('doc',{results:docs});
     });
   });
 });
@@ -70,7 +69,7 @@ app.get('/grade/:grade', function (req, res) {
     assert.equal(null, err);
 
     restGrade(db,g,function(docs){
-      res.json(docs);
+      res.render('doc',{results:docs});
     });
   });
 });
