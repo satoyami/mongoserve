@@ -1,0 +1,7 @@
+extends layout
+
+block cuisine
+  ul
+    each d in results
+      li
+        a(href="/cuisine/" + d)= d

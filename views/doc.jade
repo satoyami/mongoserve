@@ -3,4 +3,7 @@ extends layout
 block doc
   ul
     each d in results
-      li= d.name + ' ' + d.address
+      li= d.name
+        ul
+          li= d.address.street + d.address.zipcode
+          li= d.borough
