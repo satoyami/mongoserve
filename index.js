@@ -6,9 +6,10 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+//app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(__dirname));
 
-
-var url = 'mongodb://10.0.0.44:27017/test';
+var url = 'mongodb://10.0.0.7:27017/test';
 
 /*
  * Query function defintion
@@ -76,7 +77,7 @@ var restGrade = function(db,grade,callback) {
  * API defintion
  */
 app.get('/', function (req, res) {
-  res.render('index',{title:'index'});
+  res.render('index',{title:'This Is the Index!'});
 });
 app.get('/cuisine', function (req, res) {
   MongoClient.connect(url, function(err, db) {
@@ -107,7 +108,7 @@ app.get('/score/:score', function (req, res) {
   });
 });
 app.get('/grade/:grade', function (req, res) {
-  var g = req.params.grade;
+  var g = req.params.grade.toUpperCase();
   MongoClient.connect(url, function(err, db) {
     assert.equal(null, err);
     restGrade(db,g,function(docs){

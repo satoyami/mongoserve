@@ -7,3 +7,9 @@ block doc
         ul
           li= d.address.street + d.address.zipcode
           li= d.borough
+          ul
+            - var score = []
+            each s in d.grades
+              - score.push(s.score)
+            - var highscore = score.reduce(function(prv,cur){return prv > cur ? prv : cur;},null)
+            li Highest Score: #{highscore}

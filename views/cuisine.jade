@@ -4,4 +4,5 @@ block cuisine
   ul
     each d in results
       li
-        a(href="/cuisine/" + d)= d
+        //a(href="/cuisine/" + d,onclick="encodeLink(this)")= d
+        a(href="#",onclick="encodeLink('"+d+"')")= d
